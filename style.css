@@ -15,6 +15,7 @@
 }
 
 body {
+    font-family: "Segoe UI", sans-serif;
   background: var(--gradient);
   margin: 0;
   padding: 0;
@@ -76,12 +77,16 @@ h2 {
 }
 
 .input-field {
+    margin-top: 1rem;
   width: 100%;
   border: 0.06rem solid #d2d2d2df;
   border-radius: 0.5rem;
   padding: 1.25rem;
   font-size: 1rem;
   line-height: 1.3rem;
+}
+.input-field:focus{
+    outline: 2px solid var(--blue);
 }
 
 input[type="text"]::placeholder {
