@@ -43,6 +43,11 @@ body {
   outline: 3px solid var(--blue);
 }
 
+.btn:hover{
+  filter: brightness(1.3);
+  cursor: pointer;
+}
+
 h1,
 h2,
 p {
