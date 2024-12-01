@@ -12,6 +12,8 @@
   --blue: #2d70fd;
   --green: #00d8a7;
   --white: #fff;
+  /* --pink: #fd88ae; */
+  --contrast: #811738;
 }
 
 *{
@@ -168,11 +170,6 @@ input[type="checkbox"]:checked::before {
   font-size: 18px;
 }
 
-input[type="checkbox"]:checked p{
-  /* text-decoration: line-through; */
-  color: red;
-}
-
 .counter {
   border: 0.06rem solid var(--grey-light);
 }
@@ -210,4 +207,22 @@ input[type="checkbox"]:checked p{
 }
 .scroll::-webkit-scrollbar-track{
     display: none;
+}
+
+#deleteButton{
+  background-color: var(--contrast);
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 12px;
+  letter-spacing: .1rem;
+  border: 2px solid white;
+}
+
+#deleteButton:focus{
+outline: 2px solid var(--contrast);
+}
+
+#deleteButton:hover{
+  filter: brightness(1.2);
+  cursor: pointer; 
 }
