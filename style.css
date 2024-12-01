@@ -14,6 +14,10 @@
   --white: #fff;
 }
 
+*{
+  caret-color: transparent;
+}
+
 body {
     font-family: "Segoe UI", sans-serif;
   background: var(--gradient);
@@ -117,6 +121,8 @@ li {
   gap: .5rem;
   padding: 1.3rem 0 ;
 }
+
+
 
 #todoList p {
 display: flex;

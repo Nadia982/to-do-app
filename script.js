@@ -55,6 +55,12 @@ function displayTasks(){
     todoCount.textContent= todo.length;
 }
 
+function toggleTask(index){
+    todo[index].disabled = !todo[index].disabled;
+    saveToLocalStorage();
+    displayTasks();
+}
+
 function saveToLocalStorage(){
     console.log("Saving to localStorage", todo); // Debugging
     localStorage.setItem("todo", JSON.stringify(todo));
