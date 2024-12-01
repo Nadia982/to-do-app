@@ -175,7 +175,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .counter-container {
-  height: 2rem;
+  /* height: 2rem; */
   display: flex;
   justify-content: space-between;
   color: var(--grey);
@@ -183,13 +183,6 @@ input[type="checkbox"]:checked::before {
 
 .counter-container p {
   align-self: center;
-}
-
-.counter-container button {
-  border: none;
-  background-color: transparent;
-  color: var(--grey);
-  font-size: 1rem;
 }
 
 .scroll {
@@ -213,9 +206,10 @@ input[type="checkbox"]:checked::before {
   background-color: var(--contrast);
   color: #fff;
   border-radius: 6px;
-  padding: 2px 12px;
+  padding: 10px 16px;
   letter-spacing: .1rem;
   border: 2px solid white;
+  font-size: 1rem;
 }
 
 #deleteButton:focus{
