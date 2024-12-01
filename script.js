@@ -32,11 +32,6 @@ function addTask(){
     }
 }
 
-function deleteAllTasks(){
-    console.log("test")
-    // todo = [];
-}
-
 function displayTasks(){
     todoList.innerHTML = "";
     todo.forEach((item, index)=> {
@@ -60,6 +55,12 @@ function toggleTask(index){
     saveToLocalStorage();
     displayTasks();
 }
+
+function deleteAllTasks(){
+    todo = [];
+    saveToLocalStorage();
+    displayTasks();
+    }
 
 function saveToLocalStorage(){
     console.log("Saving to localStorage", todo); // Debugging
