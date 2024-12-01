@@ -114,16 +114,19 @@ ul {
 li {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  padding: 1.3rem;
+  gap: .5rem;
+  padding: 1.3rem 0 ;
 }
 
 #todoList p {
-  color: #8f98a8;
+display: flex;
+gap: .5rem;
+color: var(--dark);
+align-items: center;
 }
 
-.disabled {
-  display: flex;
+#todoList .disabled {
+  color: #8f98a8;
   text-decoration: line-through;
 }
 
@@ -140,12 +143,28 @@ input[type="checkbox"]::before {
   border: 0.06rem solid var(--grey-border);
   color: transparent;
 }
+
+input[type="checkbox"]{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
 /* Below targets ticked checkmark */
-input[type="checkbox"]::before::after {
+input[type="checkbox"]:checked::before {
   color: var(--white);
   background-color: var(--green);
   border: 0.06rem solid var(--green);
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+input[type="checkbox"]:checked p{
+  /* text-decoration: line-through; */
+  color: red;
 }
 
 .counter {

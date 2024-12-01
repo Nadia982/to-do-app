@@ -32,7 +32,10 @@ function addTask(){
     }
 }
 
-
+function deleteAllTasks(){
+    console.log("test")
+    // todo = [];
+}
 
 function displayTasks(){
     todoList.innerHTML = "";
