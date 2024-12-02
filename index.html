@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -19,19 +19,27 @@
         />
         <button class="btn">Add</button>
       </div>
-      <ul class="scroll">
-        <li id="todoList"></li>
-      </ul>
-      <div><hr class="counter">
+      <div class="todo-outer-container">
+        <div class="todo-section-container">
+        <h3>To do</h3>
+        <ul class="scroll">
+          <li id="todoList"></li>
+        </ul>
+      </div>
+      <div class="todo-section-container">
+        <h3>Done</h3>
+        <ul class="scroll">
+          <li id="todoList-done"></li>
+        </ul>
+      </div>
+      </div>
+      <div>
+        <hr class="counter" />
         <div class="counter-container">
-            <p><span id="todoCount">
-                0
-            </span> item(s) total</p>
-            <button id="deleteButton">Delete All</button>
+          <p><span id="todoCount"> 0 </span> item(s) total</p>
+          <button id="deleteButton">Delete All</button>
         </div>
-    </div>
-      
+      </div>
     </section>
-
   </body>
 </html>

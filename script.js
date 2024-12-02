@@ -3,6 +3,7 @@
 let todo = JSON.parse(localStorage.getItem("todo")) || [];
 const todoInput = document.getElementById("todoInput");
 const todoList = document.getElementById("todoList");
+const todoListDone = document.getElementById("todoList-done");
 const todoCount = document.getElementById("todoCount");
 const addButton = document.querySelector(".btn");
 const deleteButton = document.getElementById("deleteButton");
@@ -34,20 +35,42 @@ function addTask(){
 
 function displayTasks(){
     todoList.innerHTML = "";
-    todo.forEach((item, index)=> {
-        const p = document.createElement("p")
-        p.innerHTML = `
-        <div class="todo-container">
-            <input type="checkbox" class="todo-checkbox" id="input-${todo}" ${item.disabled ? "checked" : ""}>
-            <p id="todo-${index}" class="${item.disabled?"disabled": ""}" onclick="editTask(${index})">${item.text}</p>
-                        </div>
-                `;
-                p.querySelector(".todo-checkbox").addEventListener("change", ()=>{
-                    toggleTask(index)
-                });
-                todoList.appendChild(p);
-    })
-    todoCount.textContent= todo.length;
+    todoListDone.innerHTML = "";
+
+    todo.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "todo-container";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "todo-checkbox";
+        checkbox.id = `input-${index}`;
+        checkbox.checked = item.disabled;
+
+        checkbox.addEventListener("change", () => {
+            toggleTask(index);
+        });
+
+        const p = document.createElement("p");
+        p.id = `todo-${index}`;
+        p.className = item.disabled ? "disabled" : "";
+        p.textContent = item.text;
+        p.addEventListener("click", () => {
+            editTask(index);
+        });
+
+        div.appendChild(checkbox);
+        div.appendChild(p);
+
+        if (item.disabled) {
+            todoListDone.appendChild(div);
+        } else {
+            todoList.appendChild(div);
+        }
+    });
+
+    // Update task count
+    todoCount.textContent = todo.length;
 }
 
 function toggleTask(index){

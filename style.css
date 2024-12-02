@@ -14,6 +14,7 @@
   --white: #fff;
   /* --pink: #fd88ae; */
   --contrast: #811738;
+  --border-radius: 10px;
 }
 
 *{
@@ -37,7 +38,7 @@ body {
   color: var(--white);
   font-size: 1.1rem;
   padding: 0.7rem 1.5rem;
-  border-radius: 0.3rem;
+  border-radius: var(--border-radius);
   background-color: var(--blue);
   border: 2px solid white;
   position: absolute;
@@ -54,6 +55,8 @@ body {
   cursor: pointer;
 }
 
+
+
 h1,
 h2,
 p {
@@ -65,13 +68,13 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border-radius: 1rem;
+  border-radius: var(--border-radius);;
   background: var(--white);
-  padding: 3rem;
+  padding: 2rem;
   min-height: 70vh;
-  width: 60%;
+  width: 70%;
   box-shadow: 0 1rem 3rem 1rem rgba(0, 23, 71, 0.15);
-  max-width: 30rem;
+  max-width: 40rem;
 }
 
 h2 {
@@ -91,7 +94,7 @@ h2 {
     margin-top: 1rem;
   width: 100%;
   border: 0.06rem solid #d2d2d2df;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);;
   padding: 1.25rem;
   font-size: 1rem;
   line-height: 1.3rem;
@@ -106,7 +109,7 @@ input[type="text"]::placeholder {
 
 .todo-container {
   display: flex;
-  gap: 1rem;
+  gap: .5rem;
 }
 
 ul {
@@ -121,19 +124,17 @@ li {
   display: flex;
   flex-direction: column;
   gap: .5rem;
-  padding: 1.3rem 0 ;
+  padding: .5rem 0 ;
 }
 
-
-
-#todoList p {
+#todoList p, #todoList-done p {
 display: flex;
 gap: .5rem;
 color: var(--dark);
 align-items: center;
 }
 
-#todoList .disabled {
+#todoList .disabled, #todoList-done .disabled {
   color: #8f98a8;
   text-decoration: line-through;
 }
@@ -148,8 +149,9 @@ input[type="checkbox"]::before {
   font-size: 1.7rem;
   text-align: center;
   border-radius: 50%;
-  border: 0.06rem solid var(--grey-border);
+  border: 0.1rem solid var(--grey-border);
   color: transparent;
+  margin: 0.15rem;
 }
 
 input[type="checkbox"]{
@@ -185,9 +187,33 @@ input[type="checkbox"]:checked::before {
   align-self: center;
 }
 
+h3 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.todo-outer-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.todo-section-container{
+  margin-top: 1rem;
+  flex-basis: 48%;
+}
+
 .scroll {
+  
+  margin-top: .5rem;
   height: 15rem;
   scrollbar-width: auto;
+  border: 1px solid var(--grey);
+  border-radius: var(--border-radius);;
 }
 
 .scroll::-webkit-scrollbar{
@@ -196,7 +222,7 @@ input[type="checkbox"]:checked::before {
 
 .scroll::-webkit-scrollbar-thumb{
     background-color: var(--blue);
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);;
 }
 .scroll::-webkit-scrollbar-track{
     display: none;
@@ -205,7 +231,7 @@ input[type="checkbox"]:checked::before {
 #deleteButton{
   background-color: var(--contrast);
   color: #fff;
-  border-radius: 6px;
+  border-radius: var(--border-radius);;
   padding: 10px 16px;
   letter-spacing: .1rem;
   border: 2px solid white;
