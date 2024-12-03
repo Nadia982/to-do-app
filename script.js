@@ -73,11 +73,33 @@ function displayTasks(){
     todoCount.textContent = todo.length;
 }
 
+function editTask(index){
+const todoItem = document.getElementById(`todo-${index}`);
+const existingText = todo[index].text;
+const inputElement = document.createElement('input');
+inputElement.style.caretColor = "var(--dark)";
+//inputElement.setAttribute('type', 'text');
+inputElement.value = existingText;
+todoItem.replaceWith(inputElement);
+inputElement.focus();
+//blur means when the focus ends/when we click out
+inputElement.addEventListener('blur',()=>{
+    const updatedText = inputElement.value.trim();
+    if(updatedText){
+        todo[index].text = updatedText;
+        saveToLocalStorage();
+        displayTasks();
+    }
+})
+}
+
 function toggleTask(index){
     todo[index].disabled = !todo[index].disabled;
     saveToLocalStorage();
     displayTasks();
 }
+
+
 
 function deleteAllTasks(){
     todo = [];
