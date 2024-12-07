@@ -24,7 +24,8 @@ function addTask(){
     const newTask = todoInput.value.trim();
     if(newTask !== ""){
         todo.push({
-            text: newTask, 
+            taskId: todo.length + 1,
+            text: newTask,
             disabled: false, 
         });
         saveToLocalStorage();
