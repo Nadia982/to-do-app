@@ -1,5 +1,3 @@
-//retrieve the todo from localStorage or initialize an empty array
-
 let todo = JSON.parse(localStorage.getItem("todo")) || [];
 const todoInput = document.getElementById("todoInput");
 const todoList = document.getElementById("todoList");
@@ -7,6 +5,8 @@ const todoListDone = document.getElementById("todoList-done");
 const todoCount = document.getElementById("todoCount");
 const addButton = document.querySelector(".btn");
 const deleteButton = document.getElementById("deleteButton");
+const toDoH3 = document.querySelector(".to-do-h3");
+const doneH3 = document.querySelector(".done-h3");
 
 document.addEventListener("DOMContentLoaded", () =>{
 addButton.addEventListener("click", () => addTask());
@@ -63,12 +63,11 @@ function displayTasks(){
 
         });
 
-        const pTrash = document.createElement("img");
-        pTrash.src = "./trash.svg";
-        pTrash.className = "trash-icon";
-        pTrash.id = `${index}`;
-        pTrash.addEventListener('click', (e) => {
-            console.log("e.target.id is: ",e.target.id);
+        const trashIcon = document.createElement("img");
+        trashIcon.src = "./trash.svg";
+        trashIcon.className = "trash-icon";
+        trashIcon.id = `${index}`;
+        trashIcon.addEventListener('click', (e) => {
             deleteTask(index);
         });
         const leftContainer = document.createElement('div');
@@ -76,7 +75,7 @@ function displayTasks(){
         leftContainer.appendChild(checkbox);
         leftContainer.appendChild(p);
         div.appendChild(leftContainer);
-        div.appendChild(pTrash);
+        div.appendChild(trashIcon);
 
         if (item.disabled) {
             todoListDone.appendChild(div);
@@ -85,7 +84,9 @@ function displayTasks(){
         }
     });
 
-    // Update task count
+
+    toDoH3.textContent = `To do (${todoList.children.length})`;
+    doneH3.textContent = `Done (${todoListDone.children.length})`;
     todoCount.textContent = todo.length;
 }
 
@@ -94,11 +95,9 @@ const todoItem = document.getElementById(`todo-${index}`);
 const existingText = todo[index].text;
 const inputElement = document.createElement('input');
 inputElement.style.caretColor = "var(--dark)";
-//inputElement.setAttribute('type', 'text');
 inputElement.value = existingText;
 todoItem.replaceWith(inputElement);
 inputElement.focus();
-//blur means when the focus ends/when we click out
 inputElement.addEventListener('blur',()=>{
     const updatedText = inputElement.value.trim();
     if(updatedText){
@@ -116,9 +115,6 @@ function toggleTask(index){
 }
 
 function deleteTask(e) {
-    // debugger;
-    console.log(e);
-    // const index = todo.findIndex(item=>item.taskId == e);
     todo.splice(e,1);
     saveToLocalStorage();
     displayTasks();
@@ -132,6 +128,5 @@ function deleteAllTasks(){
     }
 
 function saveToLocalStorage(){
-    console.log("Saving to localStorage", todo); // Debugging
     localStorage.setItem("todo", JSON.stringify(todo));
 }

@@ -67,7 +67,6 @@ p {
   margin: 0;
 }
 
-/* Todo container */
 .todo {
   display: flex;
   flex-direction: column;
@@ -158,9 +157,7 @@ caret-color: var(--dark);
   text-decoration: line-through;
 }
 
-/* Below targets unticked checkmark */
 input[type="checkbox"]::before {
-  /* The below is the unicode character for checkmark*/
   content: "\2713";
   display: inline-block;
   width: 2rem;
@@ -179,7 +176,6 @@ input[type="checkbox"]{
   -moz-appearance: none;
   cursor: pointer;
 }
-/* Below targets ticked checkmark */
 input[type="checkbox"]:checked::before {
   color: var(--white);
   background-color: var(--green);
