@@ -32,6 +32,7 @@ function addTask(){
         todoInput.value = "";
         displayTasks();
     }
+    todoInput.focus();
 }
 
 function displayTasks(){

@@ -25,7 +25,6 @@
 }
 
 
-
 body {
     font-family: "Segoe UI", sans-serif;
   background: var(--gradient);
@@ -140,6 +139,10 @@ li {
   flex-direction: column;
   gap: .5rem;
   padding: .5rem 0 ;
+}
+
+#todoInput:focus {
+  caret-color: var(--dark);
 }
 
 #todoList p, #todoList-done p {
