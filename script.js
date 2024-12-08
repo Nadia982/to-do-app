@@ -54,14 +54,28 @@ function displayTasks(){
 
         const p = document.createElement("p");
         p.id = `todo-${index}`;
-        p.className = item.disabled ? "disabled" : "";
-        p.textContent = item.text;
+        p.className = item.disabled ? "todo-item disabled" : "todo-item";
+        
+                p.textContent = item.text;
         p.addEventListener("click", () => {
             editTask(index);
+
         });
 
-        div.appendChild(checkbox);
-        div.appendChild(p);
+        const pTrash = document.createElement("img");
+        pTrash.src = "./trash.svg";
+        pTrash.className = "trash-icon";
+        pTrash.id = `${index}`;
+        pTrash.addEventListener('click', (e) => {
+            console.log("e.target.id is: ",e.target.id);
+            deleteTask(index);
+        });
+        const leftContainer = document.createElement('div');
+        leftContainer.className = "left-container";
+        leftContainer.appendChild(checkbox);
+        leftContainer.appendChild(p);
+        div.appendChild(leftContainer);
+        div.appendChild(pTrash);
 
         if (item.disabled) {
             todoListDone.appendChild(div);
@@ -100,7 +114,15 @@ function toggleTask(index){
     displayTasks();
 }
 
-
+function deleteTask(e) {
+    // debugger;
+    console.log(e);
+    // const index = todo.findIndex(item=>item.taskId == e);
+    todo.splice(e,1);
+    saveToLocalStorage();
+    displayTasks();
+    }
+  
 
 function deleteAllTasks(){
     todo = [];

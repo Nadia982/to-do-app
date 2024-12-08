@@ -1,3 +1,7 @@
+/* *{
+  border: 1px solid red;
+} */
+
 :root {
   --gradient: linear-gradient(
     180deg,
@@ -107,10 +111,20 @@ h2 {
 input[type="text"]::placeholder {
   color: var(--grey);
 }
+.left-container{
+  display: flex;
+  gap: .5rem;
+}
 
 .todo-container {
   display: flex;
   gap: .5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 1px solid var(--grey-border);
+  border-radius: var(--border-radius);
+  margin: 0.2rem;
+  padding: 0.2rem;
 }
 
 ul {
@@ -151,7 +165,7 @@ input[type="checkbox"]::before {
   font-size: 1.7rem;
   text-align: center;
   border-radius: 50%;
-  border: 0.1rem solid var(--grey-border);
+  border: 0.1rem solid var(--grey-dark);
   color: transparent;
   margin: 0.15rem;
 }
@@ -174,15 +188,25 @@ input[type="checkbox"]:checked::before {
   font-size: 18px;
 }
 
+.trash-icon{
+  width: 30px;
+  color: var(--grey-dark);
+  cursor: pointer;
+  margin-top: .4rem;
+  
+}
+
 .counter {
   border: 0.06rem solid var(--grey-light);
 }
 
 .counter-container {
-  /* height: 2rem; */
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   color: var(--grey);
+  gap: 1rem;
+  
 }
 
 .counter-container p {
