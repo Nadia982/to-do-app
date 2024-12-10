@@ -175,7 +175,10 @@ input[type="checkbox"]{
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
+  /* border: 2px solid white; */
 }
+
+
 input[type="checkbox"]:checked::before {
   color: var(--white);
   background-color: var(--green);
@@ -191,8 +194,20 @@ input[type="checkbox"]:checked::before {
   width: 30px;
   color: var(--grey-dark);
   cursor: pointer;
-  margin-top: .4rem;
-  
+  margin-top: .2rem;
+  border: 2px solid white;
+  padding: 2px;
+}
+
+input[type="checkbox"]:focus, .trash-icon:focus{
+  border: 2px solid white;
+  outline: 2px solid var(--blue);
+  border-radius: var(--border-radius);
+}
+
+input[type="checkbox"]:focus{
+  border: none;
+  /* border-radius: 50%; */
 }
 
 .counter {

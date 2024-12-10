@@ -64,12 +64,15 @@ function displayTasks() {
     });
 
     const trashIcon = document.createElement("img");
+    
     trashIcon.src = "./trash.svg";
     trashIcon.className = "trash-icon";
     trashIcon.id = `${index}`;
+    
     trashIcon.addEventListener("click", (e) => {
       deleteTask(index);
     });
+    trashIcon.setAttribute("tabindex","0");
     const leftContainer = document.createElement("div");
     leftContainer.className = "left-container";
     leftContainer.appendChild(checkbox);
