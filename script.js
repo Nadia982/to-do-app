@@ -1,4 +1,4 @@
-let todo = JSON.parse(localStorage.getItem("todo")) || [];
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
 const todoInput = document.getElementById("todoInput");
 const todoList = document.getElementById("todoList");
 const todoListDone = document.getElementById("todoList-done");
@@ -23,8 +23,8 @@ displayTasks();
 function addTask(){
     const newTask = todoInput.value.trim();
     if(newTask !== ""){
-        todo.push({
-            taskId: todo.length + 1,
+        todos.push({
+            taskId: newDate(),
             text: newTask,
             disabled: false, 
         });
@@ -32,14 +32,16 @@ function addTask(){
         todoInput.value = "";
         displayTasks();
     }
+    
     todoInput.focus();
+    
 }
 
 function displayTasks(){
     todoList.innerHTML = "";
     todoListDone.innerHTML = "";
 
-    todo.forEach((item, index) => {
+    todos.forEach((item, index) => {
         const div = document.createElement("div");
         div.className = "todo-container";
 
@@ -87,12 +89,12 @@ function displayTasks(){
 
     toDoH3.textContent = `To do (${todoList.children.length})`;
     doneH3.textContent = `Done (${todoListDone.children.length})`;
-    todoCount.textContent = todo.length;
+    todoCount.textContent = todos.length;
 }
 
 function editTask(index){
 const todoItem = document.getElementById(`todo-${index}`);
-const existingText = todo[index].text;
+const existingText = todos[index].text;
 const inputElement = document.createElement('input');
 inputElement.style.caretColor = "var(--dark)";
 inputElement.value = existingText;
@@ -101,7 +103,7 @@ inputElement.focus();
 inputElement.addEventListener('blur',()=>{
     const updatedText = inputElement.value.trim();
     if(updatedText){
-        todo[index].text = updatedText;
+        todos[index].text = updatedText;
         saveToLocalStorage();
         displayTasks();
     }
@@ -109,24 +111,24 @@ inputElement.addEventListener('blur',()=>{
 }
 
 function toggleTask(index){
-    todo[index].disabled = !todo[index].disabled;
+    todos[index].disabled = !todos[index].disabled;
     saveToLocalStorage();
     displayTasks();
 }
 
 function deleteTask(e) {
-    todo.splice(e,1);
+    todos.splice(e,1);
     saveToLocalStorage();
     displayTasks();
     }
   
 
 function deleteAllTasks(){
-    todo = [];
+    todos = [];
     saveToLocalStorage();
     displayTasks();
     }
 
 function saveToLocalStorage(){
-    localStorage.setItem("todo", JSON.stringify(todo));
+    localStorage.setItem("todos", JSON.stringify(todos));
 }
