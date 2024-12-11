@@ -20,13 +20,12 @@
   --border-radius: 10px;
 }
 
-*{
+* {
   caret-color: transparent;
 }
 
-
 body {
-    font-family: "Segoe UI", sans-serif;
+  font-family: "Segoe UI", sans-serif;
   background: var(--gradient);
   margin: 0;
   padding: 0;
@@ -54,12 +53,10 @@ body {
   outline: 3px solid var(--blue);
 }
 
-.btn:hover{
+.btn:hover {
   filter: brightness(1.3);
   cursor: pointer;
 }
-
-
 
 h1,
 h2,
@@ -71,7 +68,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border-radius: var(--border-radius);;
+  border-radius: var(--border-radius);
   background: var(--white);
   padding: 2rem;
   min-height: 70vh;
@@ -94,29 +91,29 @@ h2 {
 }
 
 .input-field {
-    margin-top: 1rem;
+  margin-top: 1rem;
   width: 100%;
   border: 0.06rem solid #d2d2d2df;
-  border-radius: var(--border-radius);;
+  border-radius: var(--border-radius);
   padding: 1.25rem;
   font-size: 1rem;
   line-height: 1.3rem;
 }
-.input-field:focus{
-    outline: 2px solid var(--blue);
+.input-field:focus {
+  outline: 2px solid var(--blue);
 }
 
 input[type="text"]::placeholder {
   color: var(--grey);
 }
-.left-container{
+.left-container {
   display: flex;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 
 .todo-container {
   display: flex;
-  gap: .5rem;
+  gap: 0.5rem;
   justify-content: space-between;
   align-items: flex-start;
   border: 1px solid var(--grey-border);
@@ -136,23 +133,25 @@ ul {
 li {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
-  padding: .5rem 0 ;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
 }
 
 #todoInput:focus {
   caret-color: var(--dark);
 }
 
-#todoList p, #todoList-done p {
-display: flex;
-gap: .5rem;
-color: var(--dark);
-align-items: center;
-caret-color: var(--dark);
+#todoList p,
+#todoList-done p {
+  display: flex;
+  gap: 0.5rem;
+  color: var(--dark);
+  align-items: center;
+  caret-color: var(--dark);
 }
 
-#todoList .disabled, #todoList-done .disabled {
+#todoList .completed p,
+#todoList-done .completed p{
   color: #8f98a8;
   text-decoration: line-through;
 }
@@ -170,14 +169,13 @@ input[type="checkbox"]::before {
   margin: 0.15rem;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
   /* border: 2px solid white; */
 }
-
 
 input[type="checkbox"]:checked::before {
   color: var(--white);
@@ -190,37 +188,32 @@ input[type="checkbox"]:checked::before {
   font-size: 18px;
 }
 
-.trash-icon{
+.trash-icon {
   width: 30px;
   color: var(--grey-dark);
   cursor: pointer;
-  margin-top: .2rem;
+  margin-top: 0.2rem;
   border: 2px solid white;
   padding: 2px;
 }
 
-input[type="checkbox"]:focus, .trash-icon:focus{
+input[type="checkbox"]:focus,
+.trash-icon:focus {
   border: 2px solid white;
   outline: 2px solid var(--blue);
   border-radius: var(--border-radius);
 }
 
-input[type="checkbox"]:focus{
+input[type="checkbox"]:focus {
   border: none;
-  /* border-radius: 50%; */
 }
 
-.counter {
-  border: 0.06rem solid var(--grey-light);
-}
-
-.counter-container {
+.footer-container {
   margin-top: 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: var(--grey);
   gap: 1rem;
-  
 }
 
 .counter-container p {
@@ -234,7 +227,7 @@ h3 {
   font-size: 1.5rem;
 }
 
-.todo-outer-container{
+.todo-outer-container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -242,47 +235,46 @@ h3 {
   justify-content: space-between;
 }
 
-.todo-section-container{
+.todo-section-container {
   margin-top: 1rem;
   flex-basis: 48%;
 }
 
 .scroll {
-  
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   height: 15rem;
   scrollbar-width: auto;
   border: 1px solid var(--grey);
-  border-radius: var(--border-radius);;
+  border-radius: var(--border-radius);
 }
 
-.scroll::-webkit-scrollbar{
-    width: .6rem;
+.scroll::-webkit-scrollbar {
+  width: 0.6rem;
 }
 
-.scroll::-webkit-scrollbar-thumb{
-    background-color: var(--blue);
-    border-radius: var(--border-radius);;
+.scroll::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+  border-radius: var(--border-radius);
 }
-.scroll::-webkit-scrollbar-track{
-    display: none;
+.scroll::-webkit-scrollbar-track {
+  display: none;
 }
 
-#deleteButton{
+#deleteButton {
   background-color: var(--contrast);
   color: #fff;
-  border-radius: var(--border-radius);;
+  border-radius: var(--border-radius);
   padding: 10px 16px;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   border: 2px solid white;
   font-size: 1rem;
 }
 
-#deleteButton:focus{
-outline: 2px solid var(--contrast);
+#deleteButton:focus {
+  outline: 2px solid var(--contrast);
 }
 
-#deleteButton:hover{
+#deleteButton:hover {
   filter: brightness(1.2);
-  cursor: pointer; 
+  cursor: pointer;
 }

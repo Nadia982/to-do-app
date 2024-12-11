@@ -1,8 +1,8 @@
+console.clear();
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 const todoInput = document.getElementById("todoInput");
 const todoList = document.getElementById("todoList");
 const todoListDone = document.getElementById("todoList-done");
-const todoCount = document.getElementById("todoCount");
 const addButton = document.querySelector(".btn");
 const deleteButton = document.getElementById("deleteButton");
 const toDoH3 = document.querySelector(".to-do-h3");
@@ -17,115 +17,114 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   deleteButton.addEventListener("click", () => deleteAllTasks());
-  displayTasks();
+  const localDataPresent = localStorage.getItem("todos");
+  if (localDataPresent !== null) {
+    todos = JSON.parse(localDataPresent);
+  }
+  for (let i = 0; i < todos.length; i++) {
+    renderTask(todos[i]);
+    console.log("rendering")
+  }
+  updateHeaders();
 });
 
+function updateHeaders() {
+  toDoH3.textContent = `To do (${todoList.children.length})`;
+  doneH3.textContent = `Done (${todoListDone.children.length})`;
+}
 function addTask() {
   const newTask = todoInput.value.trim();
+  const date = new Date();
   if (newTask !== "") {
     todos.push({
-      taskId: new Date(),
+      taskId: date.toString() + Math.random() * 1000000,
       text: newTask,
-      disabled: false,
+      completed: false,
     });
     saveToLocalStorage();
     todoInput.value = "";
-    displayTasks();
   }
+  renderTask(todos[todos.length - 1]);
+}
+function renderTask(currentTask) {
+  const div = document.createElement("div");
+  div.className = "todo-container";
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.className = "todo-checkbox";
+  checkbox.id = currentTask.taskId;
+  checkbox.checked = currentTask.completed;
+  checkbox.addEventListener("change", () => {
+    toggleTask(currentTask, div);
+  });
 
+  const p = document.createElement("p");
+  p.id = currentTask.taskId;
+  p.className = currentTask.completed ? "todo-item completed" : "todo-item";
+  p.textContent = currentTask.text;
+  const trashIcon = document.createElement("img");
+  trashIcon.src = "trash.svg";
+  //   trashIcon.src = "https://assets.codepen.io/6669924/trash.svg";
+  trashIcon.className = "trash-icon";
+  trashIcon.id = currentTask.taskId;
+  trashIcon.addEventListener("click", (e) => {
+    deleteTask(e.target.id, div);
+  });
+  trashIcon.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.code === "Space") {
+      e.preventDefault();
+      deleteTask(e.target.id, div);
+    }
+  });
+  trashIcon.setAttribute("tabindex", "0");
+  const leftContainer = document.createElement("div");
+  leftContainer.className = "left-container";
+  leftContainer.appendChild(checkbox);
+  leftContainer.appendChild(p);
+  div.appendChild(leftContainer);
+  div.appendChild(trashIcon);
+
+  if (currentTask.completed) {
+    todoListDone.appendChild(div);
+    div.classList.add("completed");
+  } else {
+    todoList.appendChild(div);
+    div.classList.remove("completed");  
+}
+  updateHeaders();
   todoInput.focus();
 }
 
-function displayTasks() {
-  todoList.innerHTML = "";
-  todoListDone.innerHTML = "";
-
-  todos.forEach((item, index) => {
-    const div = document.createElement("div");
-    div.className = "todo-container";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.className = "todo-checkbox";
-    checkbox.id = `input-${index}`;
-    checkbox.checked = item.disabled;
-
-    checkbox.addEventListener("change", () => {
-      toggleTask(index);
-    });
-
-    const p = document.createElement("p");
-    p.id = `todo-${index}`;
-    p.className = item.disabled ? "todo-item disabled" : "todo-item";
-
-    p.textContent = item.text;
-    p.addEventListener("click", () => {
-      editTask(index);
-    });
-
-    const trashIcon = document.createElement("img");
-    
-    trashIcon.src = "./trash.svg";
-    trashIcon.className = "trash-icon";
-    trashIcon.id = `${index}`;
-    
-    trashIcon.addEventListener("click", (e) => {
-      deleteTask(index);
-    });
-    trashIcon.setAttribute("tabindex","0");
-    const leftContainer = document.createElement("div");
-    leftContainer.className = "left-container";
-    leftContainer.appendChild(checkbox);
-    leftContainer.appendChild(p);
-    div.appendChild(leftContainer);
-    div.appendChild(trashIcon);
-
-    if (item.disabled) {
-      todoListDone.appendChild(div);
-    } else {
-      todoList.appendChild(div);
-    }
-  });
-
-  toDoH3.textContent = `To do (${todoList.children.length})`;
-  doneH3.textContent = `Done (${todoListDone.children.length})`;
-  todoCount.textContent = todos.length;
-}
-
-function editTask(index) {
-  const todoItem = document.getElementById(`todo-${index}`);
-  const existingText = todos[index].text;
-  const inputElement = document.createElement("input");
-  inputElement.style.caretColor = "var(--dark)";
-  inputElement.value = existingText;
-  todoItem.replaceWith(inputElement);
-  inputElement.focus();
-  inputElement.addEventListener("blur", () => {
-    const updatedText = inputElement.value.trim();
-    if (updatedText) {
-      todos[index].text = updatedText;
-      saveToLocalStorage();
-      displayTasks();
-    }
-  });
-}
-
-function toggleTask(index) {
-  todos[index].disabled = !todos[index].disabled;
+function toggleTask(currentTask, element) {
+  console.clear();
+  currentTask.completed = !currentTask.completed;
+  element.classList.toggle("completed");
+  if (currentTask.completed) {
+    todoListDone.appendChild(element);
+  } else {
+    todoList.appendChild(element);
+  }
+  updateHeaders();
   saveToLocalStorage();
-  displayTasks();
 }
 
-function deleteTask(e) {
-  todos.splice(e, 1);
+function deleteTask(id, div) {
+  console.clear();
+  todos = todos.filter((item) => item.taskId !== id);
+
+  if (div.parentNode) {
+    div.parentNode.removeChild(div);
+  }
+  updateHeaders();
   saveToLocalStorage();
-  displayTasks();
 }
 
 function deleteAllTasks() {
   todos = [];
+  todoList.innerHTML = "";
+  todoListDone.innerHTML = "";
+  updateHeaders();
   saveToLocalStorage();
-  displayTasks();
 }
 
 function saveToLocalStorage() {
