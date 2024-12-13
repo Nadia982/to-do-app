@@ -7,6 +7,7 @@ const addButton = document.querySelector(".btn");
 const deleteButton = document.getElementById("deleteButton");
 const toDoH3 = document.querySelector(".to-do-h3");
 const doneH3 = document.querySelector(".done-h3");
+const pomodoroContainer = document.querySelector(".pomodoro-container");
 
 document.addEventListener("DOMContentLoaded", () => {
   addButton.addEventListener("click", () => addTask());
@@ -23,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   for (let i = 0; i < todos.length; i++) {
     renderTask(todos[i]);
-    console.log("rendering")
   }
   updateHeaders();
 });
@@ -62,6 +62,26 @@ function renderTask(currentTask) {
   p.id = currentTask.taskId;
   p.className = currentTask.completed ? "todo-item completed" : "todo-item";
   p.textContent = currentTask.text;
+// ************start*******************
+const startIcon = document.createElement("img");
+startIcon.src = "start.svg";
+//   startIcon.src = "https://assets.codepen.io/6669924/trash.svg";
+startIcon.className = "start-icon";
+startIcon.id = currentTask.taskId;
+startIcon.addEventListener("click", (e) => {
+  startPomodoro(e.target.parentNode.firstChild.children[1].textContent);
+});
+startIcon.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.code === "Space") {
+    e.preventDefault();
+    startPomodoro(e.target.parentNode.firstChild.children[1].textContent);
+  }
+});
+startIcon.setAttribute("tabindex", "0");
+
+// **************end******************
+
+
   const trashIcon = document.createElement("img");
   trashIcon.src = "trash.svg";
   //   trashIcon.src = "https://assets.codepen.io/6669924/trash.svg";
@@ -82,6 +102,7 @@ function renderTask(currentTask) {
   leftContainer.appendChild(checkbox);
   leftContainer.appendChild(p);
   div.appendChild(leftContainer);
+  div.appendChild(startIcon);
   div.appendChild(trashIcon);
 
   if (currentTask.completed) {
@@ -106,6 +127,24 @@ function toggleTask(currentTask, element) {
   }
   updateHeaders();
   saveToLocalStorage();
+}
+
+function startPomodoro(id){
+  console.log(id);
+  const pomodoroTitle = document.createElement("p");
+    pomodoroTitle.textContent = `Current task: ${id}`;
+    pomodoroTitle.className = "pomodoro-title";
+    pomodoroContainer.textContent="";
+  pomodoroContainer.appendChild(pomodoroTitle); 
+  const timer = document.createElement("p");
+  timer.textContent = "25:00";
+  const pauseButton = document.createElement("button");
+  pauseButton.textContent = "Pause";
+  const resetButton = document.createElement("button");
+  resetButton.textContent = "Reset";
+ const stopButton = document.createElement("button");
+  stopButton.textContent = "Stop";
+
 }
 
 function deleteTask(id, div) {

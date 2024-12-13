@@ -70,11 +70,11 @@ p {
   justify-content: space-around;
   border-radius: var(--border-radius);
   background: var(--white);
-  padding: 2rem;
+  padding: 1rem 2rem;
   min-height: 70vh;
   width: 70%;
   box-shadow: 0 1rem 3rem 1rem rgba(0, 23, 71, 0.15);
-  max-width: 40rem;
+  max-width: 60rem;
 }
 
 h2 {
@@ -188,7 +188,7 @@ input[type="checkbox"]:checked::before {
   font-size: 18px;
 }
 
-.trash-icon {
+.start-icon, .trash-icon {
   width: 30px;
   color: var(--grey-dark);
   cursor: pointer;
@@ -197,8 +197,7 @@ input[type="checkbox"]:checked::before {
   padding: 2px;
 }
 
-input[type="checkbox"]:focus,
-.trash-icon:focus {
+input[type="checkbox"]:focus, .start-icon:focus, .trash-icon:focus {
   border: 2px solid white;
   outline: 2px solid var(--blue);
   border-radius: var(--border-radius);
@@ -240,9 +239,15 @@ h3 {
   flex-basis: 48%;
 }
 
+.pomodoro-title{
+  margin-top: .5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 .scroll {
   margin-top: 0.5rem;
-  height: 15rem;
+  height: 10rem;
   scrollbar-width: auto;
   border: 1px solid var(--grey);
   border-radius: var(--border-radius);
@@ -277,4 +282,34 @@ h3 {
 #deleteButton:hover {
   filter: brightness(1.2);
   cursor: pointer;
+}
+
+ol{
+  margin: 0;
+  padding: 0;
+}
+
+ol li{
+margin: 0;
+padding: 0;
+}
+
+.tasks{
+  display: flex;
+  gap: 1rem;
+}
+
+.tasks h3{
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+
+.tasks span{
+  margin: 0;
+  padding: 0;
+}
+.tasks div{
+  flex-basis: 32%;
+  font-size: .8rem;
 }

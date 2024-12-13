@@ -28,8 +28,16 @@
         </div>
         <div class="todo-section-container">
           <h3 class="to-do-h3">Pomodoro</h3>
-          <div class="scroll">
-            
+          <div class="pomodoro-container scroll">
+            <div class="pomodoro-top-container">
+              <div class="timer-container">
+                <h4 id="timer-label">25:00</h4>
+                <button id="startButton" disabled>Start</button>
+                <button id="pauseButton" disabled>Pause</button>
+                <button id="resetButton" disabled>Stop</button>
+              </div>
+              
+            </div>
           </div>
         </div>
         <div class="todo-section-container">
@@ -38,6 +46,49 @@
             <li id="todoList-done"></li>
           </ul>
         </div>
+      </div>
+      <div class="tasks">
+        <div>
+        <h3>Basic</h3>
+        <ol>
+          <li>
+            1. Allows user to go through 4 cycles of work and break; last break
+            type should be long break
+          </li>
+          <li>
+            2. Should be able to start the pomodoro when clicking on a task in the
+            todo app
+          </li>
+          <li>3. Should disable the start button if pomodoro runs</li>
+          <li>4. Should allow user to pause the pomodoro</li>
+          <li>5. Should allow user to stop the pomodoro</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Extras</h3>
+        <ol>
+          <li>
+            1. Should allow the user to change the duration of cycles, work time,
+            break time and long break time
+          </li>
+          <li>
+            2. Should play a sound when the cycles change (work, break, long break)
+          </li>
+        </ol>
+      </div>
+      <div>
+        <h3>For the real ones</h3>
+        <ol>
+          <li>1. Should show a progress bar that updates every second</li>
+          <li>2. Should throw confetti when the long break is completed</li>
+          <li>
+            3. Should show a modal that congratulates the user and asks if the task
+            they were working was completed. If the users says yes, the
+            task will be moved to completed (crossed, marked as true in the data
+            etc)
+          </li>
+        </ol>
+      </div>
       </div>
       <div>
         <div class="footer-container">
