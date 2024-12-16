@@ -30,11 +30,16 @@
           <h3 class="to-do-h3">Pomodoro</h3>
           <div class="pomodoro-container scroll">
             <div class="pomodoro-top-container">
+              <div id="modes">
+                <button class="button" data-mode-id="pomodoro">Pomodoro</button>
+                <button class="button" data-mode-id="short">Short break</button>
+                <button class="button" data-mode-id="long">Long break</button>
+                </div>
               <div class="timer-container">
                 <h4 id="timer-label">25:00</h4>
-                <button id="startButton" disabled>Start</button>
-                <button id="pauseButton" disabled>Pause</button>
-                <button id="resetButton" disabled>Stop</button>
+                <button class="button" onClick="startTimer()">Start</button>
+                <button class="button" onClick="pauseTimer()">Pause</button>
+                <button class="button" onClick="skipTimer()">Skip</button>
               </div>
               
             </div>
