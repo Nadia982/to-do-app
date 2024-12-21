@@ -18,6 +18,7 @@ const modes = {
   short: 5,
   long: 10,
 };
+let totalBreaks = 0;
 
 document.addEventListener("DOMContentLoaded", () => {
   addButton.addEventListener("click", () => addTask());
@@ -204,12 +205,29 @@ function pauseTimer() {
 function skipTimer() {}
 
 function updateTimer() {
-  time -= 1;
+  
   minutes = Math.floor(time / 60);
   seconds = time % 60;
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
   document.getElementById("timer-label").textContent = minutes + ":" + seconds;
+  if(time<=0){
+    nextTimer();
+  }
+  time -= 1;
+}
+
+function nextTimer(){
+  if(currentMode == "pomodoro"){
+      totalBreaks += 1;
+      if(totalBreaks % 4 ==0){
+        switchMode("long");
+      } else {
+        switchMode("short");
+      }
+  } else{
+    switchMode("pomodoro");
+  }
 }
 
 function resetTimer(currentMode) {
