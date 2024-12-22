@@ -19,6 +19,7 @@ const modes = {
   long: 10,
 };
 let totalBreaks = 0;
+const pomodoroTaskTitle = document.querySelector(".pomodoro-task-title");
 
 document.addEventListener("DOMContentLoaded", () => {
   addButton.addEventListener("click", () => addTask());
@@ -57,6 +58,11 @@ function addTask() {
   }
   renderTask(todos[todos.length - 1]);
 }
+
+function handleStartTask(task){
+
+}
+
 function renderTask(currentTask) {
   const div = document.createElement("div");
   div.className = "todo-container";
@@ -74,13 +80,16 @@ function renderTask(currentTask) {
   p.className = currentTask.completed ? "todo-item completed" : "todo-item";
   p.textContent = currentTask.text;
   // ************start*******************
-  const startIcon = document.createElement("img");
-  startIcon.src = "start.svg";
+  const startIcon = document.createElement("button");
+  startIcon.innerHTML = `<img class="start-icon-img" src="start.svg"/>`;
+
+  // startIcon.style.backgroundImage = 'url("start.svg")';
   //   startIcon.src = "https://assets.codepen.io/6669924/trash.svg";
   startIcon.className = "start-icon";
   startIcon.id = currentTask.taskId;
   startIcon.addEventListener("click", (e) => {
     startPomodoro(e.target.parentNode.firstChild.children[1].textContent);
+    // disableStartButton()
   });
   startIcon.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.code === "Space") {
@@ -111,9 +120,14 @@ function renderTask(currentTask) {
   leftContainer.className = "left-container";
   leftContainer.appendChild(checkbox);
   leftContainer.appendChild(p);
+
+  const rightContainer = document.createElement("div");
+  rightContainer.className = "right-container";
+  rightContainer.appendChild(startIcon);
+  rightContainer.appendChild(trashIcon);
+
   div.appendChild(leftContainer);
-  div.appendChild(startIcon);
-  div.appendChild(trashIcon);
+  div.appendChild(rightContainer);
 
   if (currentTask.completed) {
     todoListDone.appendChild(div);
@@ -141,11 +155,13 @@ function toggleTask(currentTask, element) {
 
 function startPomodoro(id) {
   console.log(id);
-  const pomodoroTitle = document.createElement("p");
-  pomodoroTitle.textContent = `Current task: ${id}`;
-  pomodoroTitle.className = "pomodoro-title";
-  pomodoroContainer.textContent = "";
-  pomodoroContainer.appendChild(pomodoroTitle);
+  pomodoroTaskTitle.textContent = id;
+
+  // const pomodoroTitle = document.createElement("p");
+  // pomodoroTitle.textContent = `Current task: ${id}`;
+  // pomodoroTitle.className = "pomodoro-title";
+  // pomodoroContainer.textContent = "";
+  // pomodoroContainer.appendChild(pomodoroTitle);
   const timer = document.createElement("p");
   timer.textContent = "25:00";
   const pauseButton = document.createElement("button");
@@ -184,12 +200,10 @@ document.querySelectorAll("#modes button").forEach((button) => {
 });
 
 function handleModeButtons(e) {
-  console.log(e.target.dataset.modeId);
   switchMode(e.target.dataset.modeId);
 }
 
 function switchMode(mode) {
-  // Modes are Pomodoro, short break, long break
   currentMode = mode;
   resetTimer(currentMode);
 }
