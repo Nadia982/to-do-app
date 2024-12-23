@@ -52,6 +52,10 @@ function addTask() {
       taskId: date.toString() + Math.random() * 1000000,
       text: newTask,
       completed: false,
+      taskCycle: 0,
+      pomodoroTimeRemaining: 1500,
+      shortBreakTimeRemaining: 300,
+      longBreakTimeRemaining: 600,
     });
     saveToLocalStorage();
     todoInput.value = "";
@@ -59,9 +63,7 @@ function addTask() {
   renderTask(todos[todos.length - 1]);
 }
 
-function handleStartTask(task){
-
-}
+function handleStartTask(task) {}
 
 function renderTask(currentTask) {
   const div = document.createElement("div");
@@ -87,10 +89,17 @@ function renderTask(currentTask) {
   //   startIcon.src = "https://assets.codepen.io/6669924/trash.svg";
   startIcon.className = "start-icon";
   startIcon.id = currentTask.taskId;
+
+  //  startIcon.onClick = startTimer();
   startIcon.addEventListener("click", (e) => {
-    startPomodoro(e.target.parentNode.firstChild.children[1].textContent);
-    // disableStartButton()
+    console.log("timer started", e.target);
+    startTimer();
   });
+
+  // startIcon.addEventListener("click", (e) => {
+  //   startPomodoro(e.target.parentNode.firstChild.children[1].textContent);
+  //   // disableStartButton()
+  // });
   startIcon.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.code === "Space") {
       e.preventDefault();
@@ -156,7 +165,6 @@ function toggleTask(currentTask, element) {
 function startPomodoro(id) {
   console.log(id);
   pomodoroTaskTitle.textContent = id;
-
   // const pomodoroTitle = document.createElement("p");
   // pomodoroTitle.textContent = `Current task: ${id}`;
   // pomodoroTitle.className = "pomodoro-title";
@@ -212,34 +220,33 @@ function startTimer() {
   timerInterval = setInterval(updateTimer, 1000);
 }
 
+function updateTimer() {
+  minutes = Math.floor(time / 60);
+  seconds = time % 60;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  document.getElementById("timer-label").textContent = minutes + ":" + seconds;
+  if (time <= 0) {
+    nextTimer();
+  }
+  time -= 1;
+}
+
 function pauseTimer() {
   clearInterval(timerInterval);
 }
 
 function skipTimer() {}
 
-function updateTimer() {
-  
-  minutes = Math.floor(time / 60);
-  seconds = time % 60;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  document.getElementById("timer-label").textContent = minutes + ":" + seconds;
-  if(time<=0){
-    nextTimer();
-  }
-  time -= 1;
-}
-
-function nextTimer(){
-  if(currentMode == "pomodoro"){
-      totalBreaks += 1;
-      if(totalBreaks % 4 ==0){
-        switchMode("long");
-      } else {
-        switchMode("short");
-      }
-  } else{
+function nextTimer() {
+  if (currentMode == "pomodoro") {
+    totalBreaks += 1;
+    if (totalBreaks % 4 == 0) {
+      switchMode("long");
+    } else {
+      switchMode("short");
+    }
+  } else {
     switchMode("pomodoro");
   }
 }
