@@ -20,6 +20,7 @@ const modes = {
 };
 let totalBreaks = 0;
 const pomodoroTaskTitle = document.querySelector(".pomodoro-task-title");
+const timerLabel = document.querySelector(".timer-label");
 
 document.addEventListener("DOMContentLoaded", () => {
   addButton.addEventListener("click", () => addTask());
@@ -52,7 +53,7 @@ function addTask() {
       taskId: date.toString() + Math.random() * 1000000,
       text: newTask,
       completed: false,
-      taskCycle: 0,
+      taskCycle: 1,
       pomodoroTimeRemaining: 1500,
       shortBreakTimeRemaining: 300,
       longBreakTimeRemaining: 600,
@@ -91,19 +92,20 @@ function renderTask(currentTask) {
   startIcon.id = currentTask.taskId;
 
   //  startIcon.onClick = startTimer();
-  startIcon.addEventListener("click", (e) => {
-    console.log("timer started", e.target);
-    startTimer();
-  });
-
   // startIcon.addEventListener("click", (e) => {
-  //   startPomodoro(e.target.parentNode.firstChild.children[1].textContent);
-  //   // disableStartButton()
+  //   console.log("timer started", e.target);
+  //   startTimer();
   // });
+
+  startIcon.addEventListener("click", (e) => {
+    startPomodoro(e.target.parentNode.parentNode.parentNode.firstChild.children[1].textContent);
+  
+    // disableStartButton()
+  });
   startIcon.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.code === "Space") {
       e.preventDefault();
-      startPomodoro(e.target.parentNode.firstChild.children[1].textContent);
+      startPomodoro(e.target.parentNode.parentNode.parentNode.firstChild.children[1].textContent);
     }
   });
   startIcon.setAttribute("tabindex", "0");
@@ -165,6 +167,7 @@ function toggleTask(currentTask, element) {
 function startPomodoro(id) {
   console.log(id);
   pomodoroTaskTitle.textContent = id;
+  timerLabel.textContent = ``;
   // const pomodoroTitle = document.createElement("p");
   // pomodoroTitle.textContent = `Current task: ${id}`;
   // pomodoroTitle.className = "pomodoro-title";
