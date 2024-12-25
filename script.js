@@ -98,8 +98,8 @@ function renderTask(currentTask) {
   // });
 
   startIcon.addEventListener("click", (e) => {
-    startPomodoro(e.target.parentNode.parentNode.parentNode.firstChild.children[1].textContent);
-  
+    // startPomodoro(e.target.parentNode.parentNode.parentNode.firstChild.children[1].textContent);
+    startPomodoro(e.target.parentNode.parentNode.parentNode.firstChild.children[1].id);
     // disableStartButton()
   });
   startIcon.addEventListener("keydown", (e) => {
@@ -165,9 +165,12 @@ function toggleTask(currentTask, element) {
 }
 
 function startPomodoro(id) {
-  console.log(id);
-  pomodoroTaskTitle.textContent = id;
-  timerLabel.textContent = ``;
+  // console.log(id)
+  // console.log(todos);
+let currentItem = todos.find(todo => todo.taskId === id);
+console.log(currentItem);
+pomodoroTaskTitle.textContent = currentItem.text;
+  // timerLabel.textContent = ``;
   // const pomodoroTitle = document.createElement("p");
   // pomodoroTitle.textContent = `Current task: ${id}`;
   // pomodoroTitle.className = "pomodoro-title";
